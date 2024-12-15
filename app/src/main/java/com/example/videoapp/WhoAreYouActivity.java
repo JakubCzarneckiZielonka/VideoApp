@@ -26,7 +26,7 @@ public class WhoAreYouActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         VideoView videoView = findViewById(R.id.videoView);
-        videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.video));
+        videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.xpp));
 
         MediaController mediaController = new MediaController(WhoAreYouActivity.this);
         mediaController.setAnchorView(videoView);

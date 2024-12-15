@@ -5,33 +5,62 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:padding="16dp">
-
-    <Button
-        android:id="@+id/buttonWhoAreYou"
+    <ImageView
+        android:id="@+id/headerTitle"
+        android:layout_width="250dp"
+        android:layout_height="120dp"
+        android:src="@drawable/asystent_i_praktykant"
+        android:contentDescription="Asystent i Praktykant"
+        android:layout_marginBottom="16dp"
+        android:adjustViewBounds="true" />
+    <TextView
+        android:id="@+id/mainTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:text="Kim jesteś" />
-
-    <Button
-        android:id="@+id/buttonDirectorInfo"
+        android:text="PAWEŁ SARKASTYCZNY"
+        android:textAlignment="center"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:layout_marginBottom="24dp" />
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="Co wiesz o reżyserze" />
+        android:gravity="center"
+        android:layout_marginBottom="20dp">
 
-    <EditText
-        android:id="@+id/editTextCode"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Wpisz kod"
-        android:inputType="text" />
+        <ImageButton
+            android:id="@+id/buttonWhoAreYou"
+            android:layout_width="250dp"
+            android:layout_height="120dp"
+            android:layout_margin="8dp"
+            android:src="@drawable/kim_jestes"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:contentDescription="Kim jesteś" />
 
-    <Button
-        android:id="@+id/buttonSubmit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Prześlij" />
+        <ImageButton
+            android:id="@+id/buttonDirectorInfo"
+            android:layout_width="250dp"
+            android:layout_height="120dp"
+            android:layout_margin="8dp"
+            android:src="@drawable/co_wiesz_o_rezyserze"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:contentDescription="Co wiesz o reżyserze" />
 
+        <ImageButton
+            android:id="@+id/buttonSubmit"
+            android:layout_width="250dp"
+            android:layout_height="120dp"
+            android:layout_margin="8dp"
+            android:src="@drawable/wpisz_kod"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:contentDescription="Wpisz kod" />
+    </LinearLayout>
 </LinearLayout>

@@ -5,7 +5,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import android.content.Context;
 
-@Database(entities = {CodeEntry.class}, version = 1)
+@Database(entities = {CodeEntry.class}, version = 1,exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract CodeEntryDao codeEntryDao();
 

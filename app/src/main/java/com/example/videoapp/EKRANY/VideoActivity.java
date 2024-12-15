@@ -10,6 +10,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.MediaController;
 import android.widget.VideoView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.videoapp.MainActivity;
@@ -26,14 +27,18 @@ public class VideoActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         VideoView videoView = findViewById(R.id.videoView);
-        videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.video));
+
+        // Odbierz kod przesłany z CodeEntryActivity
+       int videoResId = getIntent().getIntExtra("video", R.raw.xpp);
+
+        // Ustaw odpowiednie wideo
+        videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + videoResId));
 
         MediaController mediaController = new MediaController(VideoActivity.this);
         mediaController.setAnchorView(videoView);
-
         videoView.setMediaController(mediaController);
 
-        // Ustaw listener na zakończenie odtwarzania
+        // Listener na zakończenie odtwarzania
         videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
@@ -43,15 +48,16 @@ public class VideoActivity extends AppCompatActivity {
             }
         });
 
+        // Rozpocznij odtwarzanie po przygotowaniu
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mediaPlayer) {
-                mediaPlayer.setVolume(1.0f, 1.0f); // Ustaw głośność na maksimum
+                mediaPlayer.setVolume(1.0f, 1.0f);
                 mediaPlayer.start();
             }
         });
 
-        // Znajdź przycisk i ustaw listener
+        // Listener przycisku powrotu
         Button btnBackToMain = findViewById(R.id.btnBackToMain);
         btnBackToMain.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,5 +68,4 @@ public class VideoActivity extends AppCompatActivity {
             }
         });
     }
-
 }

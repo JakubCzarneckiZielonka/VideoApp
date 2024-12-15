@@ -1,24 +1,67 @@
 package com.example.videoapp;
 
-import android.os.Bundle;
 
-import androidx.activity.EdgeToEdge;
+import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.MediaController;
+import android.widget.VideoView;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import com.example.videoapp.MainActivity;
+import com.example.videoapp.R;
 
 public class DirectorInfoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_director_info);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.activity_video);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        VideoView videoView = findViewById(R.id.videoView);
+        videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.xpp));
+
+        MediaController mediaController = new MediaController(DirectorInfoActivity.this);
+        mediaController.setAnchorView(videoView);
+
+        videoView.setMediaController(mediaController);
+
+        // Ustaw listener na zakończenie odtwarzania
+        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                Intent intent = new Intent(DirectorInfoActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                mediaPlayer.setVolume(1.0f, 1.0f); // Ustaw głośność na maksimum
+                mediaPlayer.start();
+            }
+        });
+
+        // Znajdź przycisk i ustaw listener
+        Button btnBackToMain = findViewById(R.id.btnBackToMain);
+        btnBackToMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DirectorInfoActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
         });
     }
+
 }
